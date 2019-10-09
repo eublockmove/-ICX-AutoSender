@@ -70,6 +70,7 @@ else
     #claim IScore
     echo $claimIScore > temp.json
     tbears sendtx temp.json -u $endpoint -k $keystore -p $password
+    rm temp.json
     sleep 5 #wait for TX to go through
 
     #get available balance
