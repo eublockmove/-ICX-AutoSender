@@ -59,13 +59,13 @@ EOF
 #get the amount of claimable ICX
 echo $queryIScore > temp.json
 response=$(tbears call temp.json -u $endpoint)
+rm temp.json
 response="${response##*\"estimatedICX\": \"0x}"
 response="${response%%\",*}"
 response="$(echo $response | tr '[:lower:]' '[:upper:]')" #convert to uppercase so bc can work with it
 
 if (( $(echo "$response < DE0B6B3A7640000" |bc -l) )); then
     echo "Less than 1 ICX to claim ... exiting."
-    rm temp.json
 else
     #claim IScore
     echo $claimIScore > temp.json
